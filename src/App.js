@@ -8,7 +8,6 @@ const App = () => {
 
   const [products, setProducts] = useState();
   const [productsList, setProductsList] = useState();
-  const [revenue, setRevenue] = useState();
   const searchVal = useRef();
 
   // pagination code starts here 
@@ -75,11 +74,8 @@ const App = () => {
   }
 
 
-
-
-
-
   {/* Pagination starts here  */ }
+
   const Pagination = () => {
     return (
       <div className="row text-center mt-4">
@@ -154,7 +150,6 @@ const App = () => {
   return (
     <>
       <div className="container">
-
         <Header />
         {
           products ?
@@ -170,9 +165,7 @@ const App = () => {
             products ? <Table tableData={products.slice(pageIndex * pageSize, (pageIndex * pageSize) + pageSize)} /> :
               <div class="spinner-border" role="status"></div>
           }
-
           <Pagination />
-
         </div>
       </div>
     </>
