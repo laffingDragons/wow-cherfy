@@ -88,6 +88,16 @@ const App = () => {
     })
   }
 
+  function debounce(fn, delay = 500) {
+    let timer;
+    return function () {
+        clearTimeout(timer)
+        timer = setTimeout(() => {
+          filterProducts();
+        }, delay);
+    }()
+}
+
   {/* Pagination starts here  */ }
   const Pagination = () => {
     return (
@@ -149,7 +159,7 @@ const App = () => {
               <div>
                 Total revenue :  <b>{formatNumber()}</b>
               </div>
-              <input className='search-input' ref={searchVal} type="text" onChange={filterProducts} placeholder="Search..." />
+              <input className='search-input' ref={searchVal} type="text" onChange={debounce} placeholder="Search..." />
             </div> : ''
         }
         <div>
