@@ -22,6 +22,7 @@ const App = () => {
     fetchAndMergeBranch();
   }, []);
 
+  // Fetch JSON file from public/api folder 
   const fetchtData = (url) => {
     return fetch(url,
       {
@@ -45,7 +46,6 @@ const App = () => {
       let tableData = [...res[0].products, ...res[1].products, ...res[2].products];
       tableData = mergeSimilar(tableData);
       tableData = sortByName(tableData);
-      console.log("🚀 ~ doGetUsers ~ tableData", (tableData));
       setProducts(tableData);
       setProductsList(tableData);
       calcNoOfPages(tableData.length);
@@ -75,28 +75,9 @@ const App = () => {
   }
 
 
-  const  calcNoOfPages = (noOfResults, startFrom) => {
-    let pages = noOfResults % pageSize ? Math.floor(noOfResults / pageSize) + 1 : (noOfResults / pageSize);
-    setPageIndex((prevData) => {
-      if(startFrom ){
-        return { ...prevData, noOfPages: pages , pageIndex : 0}
 
-      }else{
-        
-        return { ...prevData, noOfPages: pages }
-      }
-    })
-  }
 
-  function debounce(fn, delay = 500) {
-    let timer;
-    return function () {
-        clearTimeout(timer)
-        timer = setTimeout(() => {
-          filterProducts();
-        }, delay);
-    }()
-}
+
 
   {/* Pagination starts here  */ }
   const Pagination = () => {
@@ -115,39 +96,61 @@ const App = () => {
       </div>
     )
   }
+
+  const calcNoOfPages = (noOfResults, startFrom) => {
+    let pages = noOfResults % pageSize ? Math.floor(noOfResults / pageSize) + 1 : (noOfResults / pageSize);
+    setPageIndex((prevData) => {
+      if (startFrom) {
+        return { ...prevData, noOfPages: pages, pageIndex: 0 }
+
+      } else {
+
+        return { ...prevData, noOfPages: pages }
+      }
+    })
+  }
+
   {/* Pagination Ends here  */ }
 
-
+  // Search starts here 
   const filterProducts = () => {
     let search = searchVal.current.value.toLowerCase();
     if (!search) {
       setProducts(productsList);
       calcNoOfPages(productsList.length, true);
-    }
-    else {
+    } else {
       const filterList = productsList.filter(obj => {
         return obj.name.toLowerCase().includes(search);
       })
-      console.log("🚀 ~ filterProducts ", filterList)
       setProducts(filterList);
-      
+
       calcNoOfPages(filterList.length, true);
     };
 
-
   }
+
+  function debounce(fn, delay = 500) {
+    let timer;
+    return function () {
+      clearTimeout(timer)
+      timer = setTimeout(() => {
+        filterProducts();
+      }, delay);
+    }()
+  }
+
+  // search ends here 
 
   function formatNumber() {
     let total = 0
-
     products.map(product => {
       total = (product.unitPrice * product.sold) + total;
     })
-
     return total.toFixed(2);
   }
 
 
+  ////////////////////////Return///////////////////////////////////////
   return (
     <>
       <div className="container">
