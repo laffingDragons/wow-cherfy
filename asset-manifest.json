@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/wow-cherfy/static/css/main.628e048e.css",
+    "main.js": "/wow-cherfy/static/js/main.403531b1.js",
+    "static/js/787.82669d9a.chunk.js": "/wow-cherfy/static/js/787.82669d9a.chunk.js",
+    "index.html": "/wow-cherfy/index.html",
+    "main.628e048e.css.map": "/wow-cherfy/static/css/main.628e048e.css.map",
+    "main.403531b1.js.map": "/wow-cherfy/static/js/main.403531b1.js.map",
+    "787.82669d9a.chunk.js.map": "/wow-cherfy/static/js/787.82669d9a.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.628e048e.css",
+    "static/js/main.403531b1.js"
+  ]
+}
